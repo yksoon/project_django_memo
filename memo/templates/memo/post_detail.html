@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if post.update_date %}
+        {{ post.update_date }}
+        {{ post.title }}
+        {{ post.content }}
+    {% endif %}
+    <br />
+    <button onclick="location.href='/'">목록</button>
+    <a href="{% url 'post_update' pk=post.pk %}">
+        수정
+    </a>
+    <script type="text/JavaScript">
+        function btn_event(){
+          if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+              location.href="{% url 'post_delete' pk=post.pk %}"
+          }else{   //취소
+              return;
+          }
+        }
+    </script>
+    <input type="button" value="삭제" onclick="btn_event();">
+
+</body>
+</html>
+

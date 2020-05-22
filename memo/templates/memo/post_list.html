@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <style type="text/css">
+    .card-text {
+      height: 100px;
+      white-space: break-spaces;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+  </style>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>메모장</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../../static/css/shop-homepage.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+  
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-lg-3">
+
+        <h1 class="my-4">메모장</h1>
+        <div class="list-group">
+          <a href="{% url 'post_add' %}" class="list-group-item">추가</a>
+        </div>
+
+      </div>
+
+      <div class="col-lg-9">
+        
+
+        <div class="row">
+
+            {% for post in posts %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                        <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
+                        </h4>
+                        <h5>{{ post.update_date }}</h5>
+                        
+                          <p class="card-text">{{ post.content|linebreaksbr }}</p>
+                        
+                        <div class="content-footer">
+                          
+                          {% if post.content|length > 52 %}
+                            ...
+                            <br />
+                            <a href="{% url 'post_detail' pk=post.pk %}">더보기</a>
+                          {% endif %}
+                        </div>
+                    </div>
+                    <script type="text/JavaScript">
+                      function btn_event(){
+                        if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+                            location.href="{% url 'post_delete' pk=post.pk %}"
+                        }else{   //취소
+                            return;
+                        }
+                      }
+                      </script>
+                    <div>
+                      <input type="button" value="삭제" onclick="btn_event();">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <!-- /.row -->
+
+      </div>
+      <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../../static/vendor/jquery/jquery.min.js"></script>
+  <script src="../../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html> 
