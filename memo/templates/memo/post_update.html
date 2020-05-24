@@ -3,14 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>메모 수정</title>
+
+    <style type="text/css">
+        h1{
+            text-align: center;
+            margin-top: 10px;
+        }
+        .title{
+            font-size: large;
+        }
+        .title2{
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        input#id_title{
+            width: 85%;
+            height: 30px;
+            font-size: large;
+            font-weight: bold;
+        }
+        .title_input{
+            text-align: center;
+        }
+        .detail{
+            margin-top: 5%;
+            margin-left: 40%;
+            width: 300px;
+            height: 600px;
+            border-radius: 7px;
+            border: 2px solid dimgray;
+        }
+        .date{
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        .content{
+            margin-left: 20px;
+            margin-right: 20px;
+            height: 370px;
+            overflow: scroll;
+        }
+        .btn{
+            font-size: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        .modify{
+            margin-left: 33%;
+        }
+        a { text-decoration: none; color: black; }
+        a:visited { text-decoration: none; }
+        a:hover { text-decoration: none; }
+        a:focus { text-decoration: none; }
+        a:hover, a:active { text-decoration: none; }
+    </style>
 </head>
 <body>
-    <form method="POST">{% csrf_token %}
-        {{ form.as_p }}
-        <a href='/'>목록</a>
-        <button type="submit">저장</button>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="detail">
+
+                <div class="title">
+                    <br />
+                    <h1>메모 수정</h1>
+                </div>
+                <div class="title_2">
+                    <p class="title_input">{{ form.title }}</p>
+                </div>
+                <div class="content">
+                    <hr>
+                    {{ form.content }}
+                </div>
+
+            <br />
+    
+            <div class="btn">
+                <hr>
+    
+                <a href='/' class="menu">
+                    <img src="../../../static/img/home.png">
+                </a>
+
+                <button type="submit" class="submit" style="float: right; background-color:transparent; border:0px;">
+                    <img src="../../../static/img/save.png" style="cursor:pointer;">
+                </button>
+            </div>
+        </div>
     </form>
 
 </body>
 </html>
+

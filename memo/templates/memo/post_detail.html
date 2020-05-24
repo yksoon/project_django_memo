@@ -3,29 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{ post.title }}</title>
+
+    <style type="text/css">
+        h1{
+            text-align: center;
+            margin-top: 10px;
+        }
+        .title{
+            font-size: large;
+        }
+        .detail{
+            margin-top: 5%;
+            margin-left: 40%;
+            width: 300px;
+            height: 600px;
+            border-radius: 7px;
+            border: 2px solid dimgray;
+        }
+        .date{
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        .content{
+            margin-left: 20px;
+            height: 330px;
+            overflow: scroll;
+        }
+        .btn{
+            font-size: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        .modify{
+            margin-left: 33%;
+        }
+        a { text-decoration: none; color: black; }
+        a:visited { text-decoration: none; }
+        a:hover { text-decoration: none; }
+        a:focus { text-decoration: none; }
+        a:hover, a:active { text-decoration: none; }
+    </style>
 </head>
 <body>
-    {% if post.update_date %}
-        {{ post.update_date }}
-        {{ post.title }}
-        {{ post.content }}
-    {% endif %}
-    <br />
-    <button onclick="location.href='/'">목록</button>
-    <a href="{% url 'post_update' pk=post.pk %}">
-        수정
-    </a>
-    <script type="text/JavaScript">
-        function btn_event(){
-          if (confirm("정말 삭제하시겠습니까??") == true){    //확인
-              location.href="{% url 'post_delete' pk=post.pk %}"
-          }else{   //취소
-              return;
-          }
-        }
-    </script>
-    <input type="button" value="삭제" onclick="btn_event();">
+    <div class="detail">
+        {% if post.update_date %}
+
+            <div class="title">
+                <br />
+                <h1>{{ post.title }}</h1>
+            </div>
+            <div class="date">
+                <p>{{ post.update_date|date:"Y-m-d" }}</p>
+                <p>{{ post.update_date|date:"A h:i" }}</p>
+                <hr>
+            </div>
+            <div class="content">
+                <p>{{ post.content|linebreaksbr }}</p>
+            </div>
+        {% endif %}
+        <br />
+
+        <div class="btn">
+            <hr>
+
+                <a href='/' class="menu">
+                    <img src="../../static/img/home.png">
+                </a>
+
+
+                <a href="{% url 'post_update' pk=post.pk %}" class="modify">
+                    <img src="../../static/img/edit.png">
+                </a>
+            
+            <script type="text/JavaScript">
+                function btn_event(){
+                if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+                    location.href="{% url 'post_delete' pk=post.pk %}"
+                }else{   //취소
+                    return;
+                }
+                }
+            </script>
+
+                <a onclick="btn_event();" class="delete" style="float: right;">
+                    <img src="../../static/img/delete.png" style="cursor:pointer;">
+                </a>
+            
+        </div>
+
+    </div>
+
 
 </body>
 </html>

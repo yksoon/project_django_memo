@@ -10,6 +10,9 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    .btn{
+
+    }
 
   </style>
 
@@ -26,11 +29,10 @@
   <!-- Custom styles for this template -->
   <link href="../../static/css/shop-homepage.css" rel="stylesheet">
 
-
 </head>
 
 <body>
-  
+
   <!-- Page Content -->
   <div class="container">
 
@@ -54,10 +56,12 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h4 class="card-title">
+                        <h3 class="card-title">
                         <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
-                        </h4>
-                        <h5>{{ post.update_date }}</h5>
+                        </h3>
+                        <h5>{{ post.update_date|date:"Y-m-d" }}</h5>
+                        <h5>{{ post.update_date|date:"A h:i" }}</h5>
+                        <hr>
                         
                           <p class="card-text">{{ post.content|linebreaksbr }}</p>
                         
@@ -70,17 +74,27 @@
                           {% endif %}
                         </div>
                     </div>
-                    <script type="text/JavaScript">
-                      function btn_event(){
-                        if (confirm("정말 삭제하시겠습니까??") == true){    //확인
-                            location.href="{% url 'post_delete' pk=post.pk %}"
-                        }else{   //취소
+                    <div class="btn">
+                      <hr>
+                      <script type="text/JavaScript">
+                        function btn_event(pk){
+                          var text1 = "pk=";
+                          var text2 = pk;
+                          var text3 = text1.concat(text2);
+                          var text4 = "{% url 'post_delete' ";
+                          var text5 = " %}";
+                          var text6 = text4.concat(text3, text5);
+                          if (confirm(text6) == true){    //확인
+                            location.href= text6;
+                          }else{   //취소
                             return;
+                          }
                         }
-                      }
                       </script>
-                    <div>
-                      <input type="button" value="삭제" onclick="btn_event();">
+                      {{ post.pk }}
+                      <a onclick="btn_event({{ post.pk }});" style="float: right;" class="delete">
+                        <img src="../../static/img/delete.png" style="cursor:pointer;">
+                      </a>
                     </div>
                 </div>
             </div>
