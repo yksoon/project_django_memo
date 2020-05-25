@@ -10,8 +10,8 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .btn{
-
+    .delete{
+      text-align: center;
     }
 
   </style>
@@ -78,23 +78,16 @@
                       <hr>
                       <script type="text/JavaScript">
                         function btn_event(pk){
-                          var text1 = "pk=";
-                          var text2 = pk;
-                          var text3 = text1.concat(text2);
-                          var text4 = "{% url 'post_delete' ";
-                          var text5 = " %}";
-                          var text6 = text4.concat(text3, text5);
-                          if (confirm(text6) == true){    //확인
-                            location.href= text6;
+                          if (confirm("삭제 하시겠습니까?") == true){    //확인
+                            location.href= "memo/" + pk + "/delete/"
                           }else{   //취소
                             return;
-                          }
+                          } 
                         }
                       </script>
-                      {{ post.pk }}
-                      <a onclick="btn_event({{ post.pk }});" style="float: right;" class="delete">
-                        <img src="../../static/img/delete.png" style="cursor:pointer;">
-                      </a>
+                        <a onclick="btn_event({{ post.pk }});" style="float: right;" class="delete">
+                          <img src="../../static/img/delete.png" style="cursor:pointer;">
+                        </a>
                     </div>
                 </div>
             </div>

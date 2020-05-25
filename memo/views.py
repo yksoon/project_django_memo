@@ -6,7 +6,7 @@ from .forms import PostForm
 # Create your views here.
 
 def post_list(request):
-    posts = Post.objects.filter(update_date__lte=timezone.now()).order_by('-update_date')
+    posts = Post.objects.filter(update_date__lte=timezone.now()).order_by('update_date')
     return render(request, 'memo/post_list.html', {'posts': posts})
 
 def post_add(request):
